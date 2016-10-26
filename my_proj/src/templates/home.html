@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}Home{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="home" %}
+{% endblock %}
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-primary" href="{% url 'accounts:login' %}" role="button">Log in</a>
+<a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block splash %}
+  
+       <!--begin bg-carousel-->
+<div id="bg-fade-carousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
+<!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="slide1"  ><div class="col-md-8 col-sm-8">
+         
+          
+	  
+        </div></div>
+        </div>
+        <div class="item" >
+            <div class="slide2"  ><div class="col-md-8 col-sm-8">
+        
+          
+	  
+        </div></div>
+        </div>
+        <div class="item" >
+            <div class="slide3"  ><div class="col-md-8 col-sm-8">
+          
+          
+
+        </div></div>
+        </div>
+        <div class="item">
+            <div class="slide4" ><div class="col-md-8 col-sm-8">
+          
+          
+
+        </div></div>
+        </div>
+    </div><!-- .carousel-inner --> 
+    <div class="container carousel-overlay text-center">
+        
+       
+        
+    </div>
+</div><!-- .carousel --> 
+<!--end bg-carousel--> 
+        
+   
+{% endblock splash %}
+
+{% block container %}
+<!-- Benefits of the Django application -->
+<a name="about"></a>
+
+<div class="container">
+  <div class="row">
+    <a href="{% url 'symptomchecker:symptomchecker' %}">
+    <div class="col-lg-3">
+      <h2>Symptom<b style="color:#069">Checker</b></h2>
+      
+    
+      <img src="{% static 'site/img/symptom.jpeg' %}" alt="logo">
+    
+    </div>
+  </a>
+  <a href="{% url 'finddoctor:finddoctor' %}">
+    <div class="col-lg-3">
+      <h2>Find<b style="color:#069">Doctor</b></h2> 
+      
+     
+       
+      <img src="{% static 'site/img/doctor.jpeg' %}" alt="logo" href="#" style="PADDING-TOP: 10px" object-fit: contain>
+     
+    </div>
+  </a>
+  <a href="{% url 'medicinepredictor:medicinepredictor' %}">
+    <div class="col-lg-3">
+     <h2>Medicine<b style="color:#069">Predictor</b></h2>
+     
+       
+      <img src="{% static 'site/img/index.jpeg' %}" alt="logo" >
+   
+    </div>
+  </a>
+  <a href="{% url 'healthtips:healthtips' %}">
+     <div class="col-lg-3">
+      <h2>Health<b style="color:#069">Tips</b></h2>
+      
+      <img src="{% static 'site/img/healthtip.png' %}" alt="logo" style="height: 70%; width: 70%; PADDING-TOP: 10px" object-fit: contain>
+    
+      
+    </div>
+  </a>
+  </div>
+</div>
+<h2 style="PADDING-LEFT: 72px;PADDING-TOP: 40px">Health<b style="color:#069">News</b></h2>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+       <h4 style="color:#069;PADDING-TOP: 20px;PADDING-LEFT: 5px"></h4>
+
+       <img src="{% static 'site/img/pushup.jpg' %}" alt="logo" style="width: 100%;height: 100%">
+       <h3 style="color:#069">Fitness And Exercise</h3>
+      <p  style="text-align:justify">By incorporating a stretching program into your daily routine, you can increase your flexibility and range of motion. You can also improve performance in sports and daily tasks. Stretching can help prevent injury and decrease pain associated with muscle tightness.This sequence can take less than 10 minutes, or longer if you want to stay in poses for a few breaths longer or repeat the whole sequence a few times</p>
+    </div>
+  </div>
+  <div class="row">
+   <div class="col-lg-4">
+      <img src="{% static 'site/img/beepropolis.jpg' %}" alt="logo" style="width: 100%;height: 240px;PADDING-TOP: 10px" object-fit: contain>
+      <h3 style="color:#069" style="font-family:Lobster">Beauty and Skincare</h3>
+      
+      <p  style="text-align:justify">Did you know that honey isn’t the only thing that bees make? Bees also produce a compound called propolis from the sap on needle-leaved trees or evergreens. When they combine the sap with their own discharges and beeswax, they create a sticky, greenish-brown product that helps to fight disease and damage in the body.</p>
+       
+     
+    </div>
+    
+
+
+
+   <div class="col-lg-4">
+     
+      <img src="{% static 'site/img/nsaid.jpg' %}" alt="logo" style="width: 100%;height: 240px;PADDING-TOP: 10px" object-fit: contain>
+      <h3 style="color:#069" style="font-family:Lobster">Healthy Heart</h3>
+      
+      <p style="text-align:justify">Could Prescribed NSAID Painkillers Raise Heart Failure Risk? Yes, say reports.Use of prescription-strength ibuprofen, naproxen and other commonly used pain relievers may lead to higher risk of heart failure.These medications may raise a person's relative risk of heart failure by 20%, according to the analysis of medical records for 10 million patients.</p>
+       
+     
+    </div>
+     <div class="col-lg-4">
+      <img src="{% static 'site/img/essentialoil.jpg' %}" alt="logo" style="width: 100%;height: 240px;PADDING-TOP: 10px" object-fit: contain>
+      <h3 style="color:#069" style="font-family:Lobster">Depression</h3>
+      
+      <p style="text-align:justify">Depression can affect the way you feel, how you think, and the way you act.People use essential oils as complementary treatments for many conditions, including depression.These a drug-free option that may help relieve some of the symptoms and help manage the condition. In most cases, essential oils are safe and free of side effects.</p>
+       
+     
+    </div>
+
+  </div>
+  <div class="row">
+  
+
+
+   <div class="col-lg-4">
+      
+      <img src="{% static 'site/img/flaxseed.jpg' %}" alt="logo" style="width: 100%;height: 240px;PADDING-TOP: 10px" object-fit: contain>
+      <h3 style="color:#069" style="font-family:Lobster">Cancer</h3>
+      
+      <p style="text-align:justify" >Flaxseed consumption may reduce the risk of prostate cancer.These are a rich source of nutrients, such as manganese, vitamin B-1, and omega-3 fatty acids.Although researchers are still exploring the potential health benefits of flaxseed, it is proven that falxseed protects us against a number of conditions ranging from diabetes to cancer.</p>
+       
+     
+    </div>
+     <div class="col-lg-4">
+      
+      <img src="{% static 'site/img/fodmap.jpg' %}" alt="logo" style="width: 100%;height: 240px;PADDING-TOP: 10px" object-fit: contain>
+      <h3 style="color:#069" style="font-family:Lobster">Food and Nutrition</h3>
+      
+      <p style="text-align:justify">Following a low-FODMAP diet can feel restrictive. Picks for low-FODMAP fiber sources include chia seeds, rolled oats, oat bran, white potatoes with skin, navel oranges, strawberries, blueberries, raspberries and quinoa. Hydration is also very important for people with digestive issues such as IBS.</p>
+       
+     
+    </div>
+     <div class="col-lg-4">
+      
+      <img src="{% static 'site/img/diabetes.jpg' %}" alt="logo" style="width: 100%;height: 240px;PADDING-TOP: 10px" object-fit: contain>
+      <h3 style="color:#069" style="font-family:Lobster">Diabetes</h3>
+      
+      <p style="text-align:justify">Glycemic index values of the same food can vary widely and may be an unreliable indicator of blood sugar response, according to a new study. Glycemic index is considered a tool to help people with diabetes control their blood sugar levels. Based on these findings, it was proven that the glycemic index wasn't practical for food labeling. </p>
+       
+     
+    </div>
+  </div>
+
+  <div class="row">
+   <div class="col-lg-4">
+      
+      <img src="{% static 'site/img/pregnancy.jpg' %}" alt="logo" style="width: 100%;height: 240px;PADDING-TOP: 10px" object-fit: contain>
+      <h3 style="color:#069" style="font-family:Lobster">Pregnancy</h3>
+      
+      <p style="text-align:justify"> Regular exercise during pregnancy can improve heart health and stamina. Maintaining a healthy body and healthy weight gain can help reduce common pregnancy complaints and discomforts like lower back pain, fatigue and constipation and may even help make labor a little easier by improving endurance.</p>
+       
+     
+    </div>
+
+
+
+   <div class="col-lg-4">
+      
+      <img src="{% static 'site/img/sarsaparillaflowers.jpg' %}" alt="logo" style="width: 100%;height:240px;PADDING-TOP: 10px" object-fit: contain>
+      <h3 style="color:#069" style="font-family:Lobster">Natural Therapy</h3>
+      
+      <p style="text-align:justify">Sarsaparilla is a tropical plant which grows deep in the canopy of the rainforest. For centuries,people around the world used the root of this plant for treating joint problems like arthritis, and for healing skin problems like psoriasis, eczema, and dermatitis.It was also thought to cure leprosy due to its “blood-purifying” properties.</p>
+       
+     
+    </div>
+     <div class="col-lg-4">
+      
+      <img src="{% static 'site/img/allergy.jpg' %}" alt="logo" style="width: 100%;height:240px;PADDING-TOP: 10px" object-fit: contain>
+      <h3 style="color:#069" style="font-family:Lobster">Allergies</h3>
+      
+      <p style="text-align:justify">Good News! We can treat coughs due to colds, allergies, and other sinus infections with a number of home remedies that can help. For those who prefer to avoid chemicals, always keep one of these honey, probiotics, bromelain, peppermint, thyme handy to prevent getting affected by allergies. </p>
+       
+     
+    </div>
+  </div>
+</div>  
+
+{% endblock container %}
+
+
+
+
+
+
+    
+
+{% block scripts %}
+<script src="{% static 'site/js/site.js' %}"></script>
+{% endblock scripts %}
+

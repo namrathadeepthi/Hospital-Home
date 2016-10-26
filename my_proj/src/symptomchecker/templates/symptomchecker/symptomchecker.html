@@ -1,0 +1,148 @@
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Symptom-Checker</title>
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Varela+Round" rel="stylesheet"/>
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css' />
+<link href='http://fonts.googleapis.com/css?family=Abel|Satisfy' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="{% static 'materialize/css/materialize.css' %}">
+<link rel="stylesheet" href="{% static 'materialize/css/default2.css' %}" >
+<link rel="stylesheet" href="{% static 'materialize/css/fonts.css' %}" >
+<link rel="stylesheet" href="{% static 'materialize/css/style.css' %}" >
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  
+
+<!--[if IE 6]>
+<link href="default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+<body>
+<!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+      <script> $(document).ready(function() {
+  $('.modal-trigger').leanModal();
+});  </script>
+<div id="wrapper">
+	<div id="page-wrapper">
+		<div id="page">
+			<div id="wide-content" >
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+     <div class="row">
+     	<div class="col s1 m10">
+     <h4 class=black-text> Disorders and Conditions </h4>
+ </div>
+   <div class="col s1 m2">
+ <a href="#!" class=" modal-action modal-close waves-effect btn">X</a>
+</div>
+</div>
+    <p class="blue-text text-darken-3" >Cancers</p>
+    <p class="blue-text text-darken-3" >Diabetes Mellitus</p>
+    <p class="blue-text text-darken-3" >Genetics/Birth Defects</p>
+    <p class="blue-text text-darken-3" >Infections</p>
+    <p class="blue-text text-darken-3" >Injuries and Wounds</p>
+    <p class="blue-text text-darken-3" >Mental Health and Behavior</p>
+    <p class="blue-text text-darken-3" >Metabolic Problems</p>
+    <p class="blue-text text-darken-3" >Poisoning, Toxicology, Environmental Health</p>
+    <p class="blue-text text-darken-3" >Pregnancy and Reproduction</p>
+    <p class="blue-text text-darken-3" >Substance Abuse Problems</p>
+
+
+    </div>
+    
+  </div>
+   <div id="modal2" class="modal">
+    <div class="modal-content">
+     <div class="row">
+     	<div class="col s1 m10">
+     <h4 class=black-text> Body Locations/Systems </h4>
+ </div>
+   <div class="col s1 m2">
+ <a href="#!" class=" modal-action modal-close waves-effect btn">X</a>
+</div>
+</div>
+    <p class="blue-text text-darken-3" >Blood, Heart and Circulation</p>
+    <p class="blue-text text-darken-3" >Bones, Joints and Muscles</p>
+    <p class="blue-text text-darken-3" >Brains and Nerves</p>
+    <p class="blue-text text-darken-3" >Digestive System</p>
+    <p class="blue-text text-darken-3" >Ear,Nose and Throat</p>
+    <p class="blue-text text-darken-3" >Endocrine System</p>
+    <p class="blue-text text-darken-3" >Eyes and Vision</p>
+    <p class="blue-text text-darken-3" >Immune System</p>
+    <p class="blue-text text-darken-3" >Kidneys and Urinary System</p>
+    <p class="blue-text text-darken-3" >Lungs and Breathing</p>
+    <p class="blue-text text-darken-3" >Mouth and Teeth</p>
+    <p class="blue-text text-darken-3" >Skin, Hair and Nails</p>
+    <p class="blue-text text-darken-3" >Male Reproductive System</p> 
+    <p class="blue-text text-darken-3" >Female Reproductive System</p>  
+    </div>
+    
+  </div>
+  				<div class="row">
+    				
+  				<div class="col s1 m4" >
+				<p><br><img src="{% static 'site/img/symptom.jpeg' %}" alt="" width="200" height="200" class="alignleft" /> </p>
+			    </div>
+			    <div class="input-field col s1 m5">
+					<h3>Symptom<b style="color:#069">Checker</b></h3>
+					<p> Experiencing symptoms but not sure what they mean?
+Use our Symptom Checker to help determine possible causes and treatments, and when to see a doctor. </p>
+                   <form action="{% url "symptomchecker:process" %}" method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                   <input id="symptomquery" type="search" class="validate" style="border: 1px solid black" name="symptom_text" >
+                   <label for="symptom_text"></label>
+                   
+                </div>
+                 <div class="col s1 m1">
+                 <br><br><br><br><br><br><br><br><br><br>
+ 				 <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="action">Go
+                 </button>
+                 </div>
+                 </form>
+                </div>
+				
+				
+	<div class="row">
+	<br><br><br><br>
+    <div class="col s12 m6">
+        <h5 class="black-text"> Assess your Symptoms </h4>
+        <span class="blue-text"><br>Want to know what's causing your aches, pain, or rashes? We can identify conditions related to your symptoms.
+          </span>
+        </div>
+        <div class="col s12 m6">
+        	<h5 class="black-text"> Learn About Possible Causes </h4>
+        	<span class="blue-text"><br>Get a better understanding of a condition: Discover if you're at risk, how it's diagnosed, and what you can do about it.
+          </span>
+      </div>
+    </div>
+    <br><br>
+        <div class="row">    
+		
+			<a class="modal-trigger" href="#modal1"> <h6 class="black-text"><b style="color:#069;padding-left:10px" >List of most common disorders and conditions</b> </h6> </a>
+			<br> 
+            <a class="modal-trigger" href="#modal2"> <h6 class="black-text"><b style="color:#069;padding-left:10px" > List of body locations/systems</b> </h6> </a>
+		</div>
+           
+    
+            
+			</div>
+		
+
+	
+		
+
+	</div>
+</div>
+</body>
+</html>

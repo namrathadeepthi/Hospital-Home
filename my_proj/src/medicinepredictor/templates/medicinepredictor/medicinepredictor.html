@@ -1,0 +1,92 @@
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Medicine Predictor</title>
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Varela+Round" rel="stylesheet"/>
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css' />
+<link href='http://fonts.googleapis.com/css?family=Abel|Satisfy' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="{% static 'materialize/css/materialize.css' %}">
+<link rel="stylesheet" href="{% static 'materialize/css/default2.css' %}" >
+<link rel="stylesheet" href="{% static 'materialize/css/fonts.css' %}" >
+<link rel="stylesheet" href="{% static 'materialize/css/style.css' %}" >
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  
+
+<!--[if IE 6]>
+<link href="default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+<body>
+<!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+      <script> $(document).ready(function() {
+  $('.modal-trigger').leanModal();
+});  </script>
+<div id="wrapper">
+  <div id="page-wrapper">
+    <div id="page">
+      <div id="wide-content" >
+  
+  
+          <div class="row">
+            
+          <div class="col s1 m4" >
+        <p><br><img src="{% static 'site/img/index.jpeg' %}" alt="" width="200" height="200" class="alignleft" /> </p>
+          </div>
+          <div class="input-field col s1 m5">
+          <h3>Medicine<b style="color:#069">Predictor</b></h3>
+          <p> Want to know what will help you cure the disease you are suffering from ? Use our medicine predictor that helps you get the correct medicines prescribed by certified doctors registered on the site! </p>
+                   <input id="first_name" type="search" class="validate" style="border: 1px solid black" >
+                   <label for="first_name"></label>
+                   
+                </div>
+                 <div class="col s1 m1">
+                 <br><br><br><br><br><br><br><br><br><br>
+         <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="action">Go
+                 </button>
+                 </div>
+                </div>
+        
+        
+  <div class="row">
+  <br><br><br><br>
+    <div class="col s12 m6">
+        <h5 class="black-text"> Get your medicines </h4>
+        <span class="blue-text"><br>Get prescribed medicines including suggested alternatives for a safe treatment and cure. 
+          </span>
+        </div>
+        <div class="col s12 m6">
+          <h5 class="black-text"> Learn About Possible Causes </h4>
+          <span class="blue-text"><br>Get a better understanding of a condition: Discover if you're at risk, how it's diagnosed, and what you can do about it.
+          </span>
+      </div>
+    </div>
+    <br><br>
+        <div class="row">    
+    
+      <a class="modal-trigger" href="#modal1"> <h6 class="black-text"><b style="color:#069;padding-left:10px" >List of most common disorders and conditions</b> </h6> </a>
+      <br> 
+            <a class="modal-trigger" href="#modal2"> <h6 class="black-text"><b style="color:#069;padding-left:10px" > List of body locations/systems</b> </h6> </a>
+    </div>
+           
+    
+            
+      </div>
+    
+
+  
+    
+
+  </div>
+</div>
+</body>
+</html>

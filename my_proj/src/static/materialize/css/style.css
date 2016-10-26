@@ -1,0 +1,21 @@
+#login-signup{
+
+	margin-top: 60px;
+	float:right;
+	position:absolute; top:0; right:0;
+}
+.titles{
+	margin-left: 0em;
+	padding-top: 0em;
+	font-family: 'Varela Round', sans-serif;
+}
+#aboutus{
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+	}
+#contactus{
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+#bgrnd{
+	background-image: url(/images/pic01.jpg);
+}
+
