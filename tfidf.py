@@ -138,7 +138,7 @@ def normalize_tfidf():
 
 #compute_termfreq()
 compute_tfidf()
-#normalize_tfidf()
+normalize_tfidf()
 conn1.close()
 conn2.close()
 

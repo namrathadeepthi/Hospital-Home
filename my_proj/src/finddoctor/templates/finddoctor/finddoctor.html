@@ -47,19 +47,51 @@
 			    <div class="input-field col s1 m5">
 					<h3>Find<b style="color:#069">Doctor</b></h3>
 					<p> Check for a great local doctor, and book an appointment! </p>
-                   <select>
+                   <!--<select>
       <option value="" disabled selected>Select based on specialisation</option>
       <option value="1">Cardiology</option>
       <option value="2">Opthalmology</option>
       <option value="3">Psychology</option>
       <option value="3">Gynaecology</option>
+    </select>-->
+
+     
+    <form action="{% url "finddoctor:process" %}" method="POST">
+                    {% csrf_token %}
+                    <select name="category">
+      <option value="" disabled selected>Select based on Speciality</option>
+      
+      <option value="Cardiac Surgery">Cardiac Surgery</option>
+      <option value="Cardiology">Cardiology</option>
+      <option value="Physiotherapy">Physiotherapy</option>
+      <option value="Orthopedic Surgery">Orthopedic Surgery</option>
+      <option value="Neurology">Neurology</option>
+      <option value="Neuro Surgery">Neuro Surgery</option>
+      <option value="Psychiatry">Psychiatry</option>
+      <option value="Psychology">Psychology</option>
+      <option value="Gastroenterology">Gastroenterology</option>
+      <option value="Colon and Rectal Surgery">Colon and Rectal Surgery</option>
+      <option value="Otolaryngology (ENT)">Otolaryngology (ENT)</option>
+      <option value="Endocrinology">Endocrinology</option>
+      <option value="Ophthalmology (Eye Specialist)">Ophthalmology (Eye Specialist)</option>
+      <option value="General Surgery">General Surgery</option>
+      <option value="Urology">Urology</option>
+      <option value="Chest physician">Chest physician</option>
+      <option value="Dentistry">Dentistry</option>
+      <option value="Dermatology">Dermatology</option>
+      <option value="Cosmetology">Cosmetology</option>
+      <option value="Obstetrics and Gynecology">Obstetrics and Gynecology</option>
+      <option value="Sexology">Sexology</option>
     </select>
-     <select>
-      <option value="" disabled selected>Select based on Hospital</option>
-      <option value="1">Hospital 1</option>
-      <option value="2">Hospital 2</option>
-      <option value="3">Hospital 3</option>
-    </select>
+                   <input id="doctorquery" type="search" class="validate" style="border: 1px solid black" name="locality_text" >
+                   <label for="locality_text"></label>
+                </div>
+                 <div class="col s1 m1">
+                 <br><br><br><br><br><br><br><br><br><br>
+         <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="action">Go
+                 </button>
+                 {{form}}
+                 </form>
         <div class="col s1 m1">
                  <br><br>
          <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="action" style="width:500px;margin-left:-20px">Find Your Doctor >>

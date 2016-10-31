@@ -99,15 +99,22 @@
 Use our Symptom Checker to help determine possible causes and treatments, and when to see a doctor. </p>
                    <form action="{% url "symptomchecker:process" %}" method="POST">
                     {% csrf_token %}
-                    {{ form }}
+                    
                    <input id="symptomquery" type="search" class="validate" style="border: 1px solid black" name="symptom_text" >
                    <label for="symptom_text"></label>
-                   
                 </div>
                  <div class="col s1 m1">
                  <br><br><br><br><br><br><br><br><br><br>
  				 <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="action">Go
                  </button>
+                 {{form}}
+                 {% for row in rows %}
+                <p>{{ row }}</p>
+                {% endfor %}
+                <b><b>
+                {% for doctor in doctors %}
+                <p>{{ doctor }}</p>
+                {% endfor %}
                  </div>
                  </form>
                 </div>
@@ -133,8 +140,6 @@ Use our Symptom Checker to help determine possible causes and treatments, and wh
 			<br> 
             <a class="modal-trigger" href="#modal2"> <h6 class="black-text"><b style="color:#069;padding-left:10px" > List of body locations/systems</b> </h6> </a>
 		</div>
-           
-    
             
 			</div>
 		
@@ -144,5 +149,6 @@ Use our Symptom Checker to help determine possible causes and treatments, and wh
 
 	</div>
 </div>
+
 </body>
 </html>
