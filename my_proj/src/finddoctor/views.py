@@ -18,6 +18,7 @@ from nltk.corpus import stopwords
 from django.db import connection,transaction
 from collections import OrderedDict
 from pygeocoder import Geocoder
+import json
 
 # Create your views here.
 def process(request):
@@ -25,6 +26,7 @@ def process(request):
     z="1"
     specialities=[]
     cur=connection.cursor()
+    final=[]
     if request.method == 'POST':
         myform = DoctorForm(request.POST)
         if myform.is_valid():
@@ -40,9 +42,14 @@ def process(request):
             print (selected_speciality)
             cur.execute(query,data)
             results=cur.fetchall()
-            print(results)
+            #final=[]
+            for result in results:
+                final.append(str(result[1])+","+str(result[2]))
+            print(final)
+            
             cur.close()
-    return render(request, 'finddoctor/finddoctor.html', {'form':z})
+    latlong=json.dumps(final)
+    return render(request, 'finddoctor/finddoctor.html', {'form':latlong})
 
 '''
 def display(request):
