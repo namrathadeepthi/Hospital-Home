@@ -107,17 +107,26 @@ Use our Symptom Checker to help determine possible causes and treatments, and wh
                  <br><br><br><br><br><br><br><br><br><br>
  				 <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="action">Go
                  </button>
-                 {{form}}
-                 {% for row in rows %}
-                <p>{{ row }}</p>
-                {% endfor %}
-                <b><b>
-                {% for doctor in doctors %}
-                <p>{{ doctor }}</p>
-                {% endfor %}
+                 
+                
                  </div>
-                 </form>
+                 
                 </div>
+                <!--{% for row,ad in twolists%}
+                <div class="divider"></div>
+                <div class="section">
+                <h5>{{row.0}}</h5>
+                <p>{{ad}}</p>
+                </div>
+                {% endfor %}-->
+                {% for x in unique_data%}
+                <div class="divider"></div>
+                <div class="section">
+                <h5>{{x.0}} <span style="float:right">{{x.2}}</span> </h5>
+                <p>{{x.1}}</p>
+                </div>
+                {% endfor %}
+                
 				
 				
 	<div class="row">
@@ -140,10 +149,53 @@ Use our Symptom Checker to help determine possible causes and treatments, and wh
 			<br> 
             <a class="modal-trigger" href="#modal2"> <h6 class="black-text"><b style="color:#069;padding-left:10px" > List of body locations/systems</b> </h6> </a>
 		</div>
+    <div id="modal3" class="modal">
+    <div class="modal-content">
+     <div class="row">
+      <div class="col s1 m10">
+     <h4 class=black-text> Recommended Doctors </h4>
+ </div>
+   <div class="col s1 m2">
+ <a href="#!" class=" modal-action modal-close waves-effect btn">X</a>
+</div>
+
+
+
+      <table>
+        <thead>
+          <tr>
+              <th data-field="id">Doctor Name</th>
+              <th data-field="name">Speciality</th>
+              <th data-field="price">Clinic Name</th>
+              <th data-field="price">Address</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for doctor in doctors %}
+          <tr>
+            <td>{{doctor.0}}</td>
+            <td>{{doctor.1}}</td>
+             <td>{{doctor.2}}</td>
+              <td>{{doctor.3}}</td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
             
+
+
+</div>
+    
+
+
+    </div>
+    
+  </div>
+       <a class="modal-trigger waves-effect waves-light light-blue darken-3 btn " href="#modal3">Get Doctors for your symptoms</a>         
 			</div>
 		
-
+</form> 
 	
 		
 

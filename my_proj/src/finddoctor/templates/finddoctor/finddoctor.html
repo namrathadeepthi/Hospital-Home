@@ -73,7 +73,7 @@
                         
               // var ar1= ["12.9121, 77.5462° ","11.0168445,76.9558321"]
               var ar1={{form|safe}}
-              alert(ar1)
+              
                for( var j=0; j<ar1.length; j++)
                {
                    var obj={LatitudeLongitude: ar1[j] };
@@ -96,10 +96,10 @@
             else { 
                 var latlngStr = people["LatitudeLongitude"].split(",");
                 var lat = parseFloat(latlngStr[0]);
-                alert(lat);
+                
 
                 var lng = parseFloat(latlngStr[1]);
-                alert(lng);
+                
                 latlng = new google.maps.LatLng(lat, lng);
                 marker = new google.maps.Marker({
                     position: latlng,
@@ -175,7 +175,6 @@
                  <br><br><br><br><br><br><br><br><br><br>
          <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="action">Go
                  </button>
-                 {{form}}
                  </form>
         <div class="col s1 m1">
                  <br><br>
@@ -189,14 +188,14 @@
 				
 				
 	
-           
+           <div id="map-canvas" style="width: 800px; height: 500px;"></center>
+    </div>
     
             
 			</div>
 		
 
-	<div id="map-canvas" style="width: 800px; height: 500px;"></center>
-    </div>
+	
 		
 
 	</div>

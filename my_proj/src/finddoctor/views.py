@@ -18,6 +18,8 @@ from nltk.corpus import stopwords
 from django.db import connection,transaction
 from collections import OrderedDict
 from pygeocoder import Geocoder
+import subprocess
+
 import json
 
 # Create your views here.
@@ -25,10 +27,15 @@ def process(request):
     text="wrong"
     z="1"
     specialities=[]
+    
+
     cur=connection.cursor()
     final=[]
     if request.method == 'POST':
         myform = DoctorForm(request.POST)
+        #print ("****RR*****")
+        #output=subprocess.check_call(['Rscript', '/home/admin-pc/Hospital-Home/sample.R'], shell=False)
+        #print("****R***")
         if myform.is_valid():
             
             text=myform.cleaned_data['locality_text']
@@ -37,7 +44,7 @@ def process(request):
             x=latlong[0].coordinates[0]
             y=latlong[0].coordinates[1]
             z=[x,y]
-            query="SELECT ClinicName, Latitude, Lon, 111.045* DEGREES(ACOS(COS(RADIANS(latpoint)) * COS(RADIANS(Latitude))* COS(RADIANS(longpoint) - RADIANS(Lon))+ SIN(RADIANS(latpoint))* SIN(RADIANS(Latitude)))) AS distance_in_km FROM clinic_lat_long JOIN ((SELECT %s AS latpoint, %s AS longpoint) AS p) where ClinicName IN (SELECT distinct ClinicName from doc_clinic where DoctorName in (select DoctorName from doc_speciality where Speciality=%s)) ORDER BY distance_in_km LIMIT 15"
+            query="SELECT doc_speciality.DoctorName,ClinicName, Latitude, Lon,Address, 111.045* DEGREES(ACOS(COS(RADIANS(latpoint)) * COS(RADIANS(Latitude))* COS(RADIANS(longpoint) - RADIANS(Lon))+ SIN(RADIANS(latpoint))* SIN(RADIANS(Latitude)))) AS distance_in_km FROM doc_clinic as dc,clinic_add as ca,clinic_lat_long as cll JOIN ((SELECT %s AS latpoint, %s AS longpoint) AS p) where ClinicName IN (SELECT distinct ClinicName from doc_clinic where DoctorName in (select DoctorName from doc_speciality where Speciality=%s)) and ca.ClinicName=cll.ClinicName and dc.ClinicName=cll.ClinicName ORDER BY distance_in_km LIMIT 15"
             data=([x,y,selected_speciality])
             print (selected_speciality)
             cur.execute(query,data)
