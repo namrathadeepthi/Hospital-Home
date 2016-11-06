@@ -37,43 +37,34 @@
     $('select').material_select();
   });</script>
  <script type="text/javascript">
-
         var map;
         var geocoder;
         var marker;
         var people = new Array();
         var latlng;
         var infowindow;
-
         $(document).ready(function() {
             ViewCustInGoogleMap();
         });
-
         function ViewCustInGoogleMap() {
-
             var mapOptions = {
                 center: new google.maps.LatLng(12.9716, 77.5946),   // Coimbatore = (11.0168445, 76.9558321) 27.8913,78.0792
-
-
-
-                zoom: 10,        
+                zoom: 12,        
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-
             // Get data from database. It should be like below format or you can alter it.
        //  var data = '[{ "DisplayText": "adcv", "ADDRESS": "Jamiya Nagar Kovaipudur Coimbatore-641042", "LatitudeLongitude": "10.9435131,76.9383790", "MarkerId": "Customer" },{ "DisplayText": "abcd", "ADDRESS": "Coimbatore-641042", "LatitudeLongitude": "11.0168445,76.9558321", "MarkerId": "Customer"}]';
            
 //window.alert(myArray->value[0]);
         var data=new Array();;
-
                //  window.alert(data);
             
              //var ar1 = <?php echo json_encode($locationData) ?>;
                         
               // var ar1= ["12.9121, 77.5462° ","11.0168445,76.9558321"]
               var ar1={{form|safe}}
-              
+              //alert(ar1)
                for( var j=0; j<ar1.length; j++)
                {
                    var obj={LatitudeLongitude: ar1[j] };
@@ -83,9 +74,7 @@
             for (var i = 0; i < data.length; i++) {
                 setMarker(data[i]);
             }
-
         }
-
         function setMarker(people) {
             geocoder = new google.maps.Geocoder();
             infowindow = new google.maps.InfoWindow();
@@ -96,10 +85,9 @@
             else { 
                 var latlngStr = people["LatitudeLongitude"].split(",");
                 var lat = parseFloat(latlngStr[0]);
-                
-
+                //alert(lat);
                 var lng = parseFloat(latlngStr[1]);
-                
+                //alert(lng);
                 latlng = new google.maps.LatLng(lat, lng);
                 marker = new google.maps.Marker({
                     position: latlng,
@@ -117,21 +105,20 @@
                 });
             } 
         }
-
     </script>
 <div id="wrapper">
-	<div id="page-wrapper">
-		<div id="page">
-			<div id="wide-content" >
+  <div id="page-wrapper">
+    <div id="page">
+      <div id="wide-content" >
    
-  				<div class="row">
-    				
-  				<div class="col s1 m4" >
-				<p><br><img src="{% static 'site/img/doctor.jpeg' %}" alt="" width="200" height="200" class="alignleft" /> </p>
-			    </div>
-			    <div class="input-field col s1 m5">
-					<h3>Find<b style="color:#069">Doctor</b></h3>
-					<p> Check for a great local doctor, and book an appointment! </p>
+          <div class="row">
+            
+          <div class="col s1 m4" >
+        <p><br><img src="{% static 'site/img/doctor.jpeg' %}" alt="" width="200" height="200" class="alignleft" /> </p>
+          </div>
+          <div class="input-field col s1 m5">
+          <h3>Find<b style="color:#069">Doctor</b></h3>
+          <p> Check for a great local doctor, and book an appointment! </p>
                    <!--<select>
       <option value="" disabled selected>Select based on specialisation</option>
       <option value="1">Cardiology</option>
@@ -175,30 +162,47 @@
                  <br><br><br><br><br><br><br><br><br><br>
          <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="action">Go
                  </button>
-                 </form>
+                 
+                 
         <div class="col s1 m1">
                  <br><br>
-         <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="action" style="width:500px;margin-left:-20px">Find Your Doctor >>
-                 </button>
+        
                  </div>             
           </div>
-                
+          
                 </div>
 
-				
-				
-	
-           <div id="map-canvas" style="width: 800px; height: 500px;"></center>
+        
+        
+  
+           <div id="map-canvas" style="width: 800px; height: 500px;"></center></div>
+    
+         <table>
+        <thead>
+          <tr>
+              <th data-field="id">Doctor Name</th>
+              <th data-field="price">Clinic Name</th>
+              <th data-field="price">Address</th>
+          </tr>
+        </thead>
+    
+          {% for doctor in doctordata %}
+          <tr>
+            <td>{{doctor.0}}</td>
+            <td>{{doctor.1}}</td>
+             <td>{{doctor.2}}</td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>   
+      
+    </form>
+
+  
     </div>
     
-            
-			</div>
-		
 
-	
-		
-
-	</div>
+  </div>
 </div>
 </div>
 </body>

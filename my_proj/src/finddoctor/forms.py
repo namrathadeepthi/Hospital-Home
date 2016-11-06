@@ -25,5 +25,5 @@ CATEGORIES = (
     
 )
 class DoctorForm(forms.Form):
-    locality_text = forms.CharField(max_length=1000)
+    locality_text = forms.CharField(max_length=1000, required=False)
     category = forms.ChoiceField(choices=CATEGORIES, required=True )

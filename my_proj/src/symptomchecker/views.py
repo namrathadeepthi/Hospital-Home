@@ -85,6 +85,9 @@ def process(request):
         #print (user.username, user.get_full_name(), user.email)
             text=myform.cleaned_data['symptom_text']
             stop = set(stopwords.words('english'))
+            stop = stop | {'feel','like','frequently'}
+            print(stop)
+
             important_words=[]
             for i in text.lower().split():
               if i not in stop:

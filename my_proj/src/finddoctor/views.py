@@ -22,15 +22,17 @@ import subprocess
 
 import json
 
+
 # Create your views here.
 def process(request):
     text="wrong"
     z="1"
     specialities=[]
-    
+    doctordata=[]
 
     cur=connection.cursor()
     final=[]
+    latlong=[]
     if request.method == 'POST':
         myform = DoctorForm(request.POST)
         #print ("****RR*****")
@@ -44,19 +46,58 @@ def process(request):
             x=latlong[0].coordinates[0]
             y=latlong[0].coordinates[1]
             z=[x,y]
-            query="SELECT doc_speciality.DoctorName,ClinicName, Latitude, Lon,Address, 111.045* DEGREES(ACOS(COS(RADIANS(latpoint)) * COS(RADIANS(Latitude))* COS(RADIANS(longpoint) - RADIANS(Lon))+ SIN(RADIANS(latpoint))* SIN(RADIANS(Latitude)))) AS distance_in_km FROM doc_clinic as dc,clinic_add as ca,clinic_lat_long as cll JOIN ((SELECT %s AS latpoint, %s AS longpoint) AS p) where ClinicName IN (SELECT distinct ClinicName from doc_clinic where DoctorName in (select DoctorName from doc_speciality where Speciality=%s)) and ca.ClinicName=cll.ClinicName and dc.ClinicName=cll.ClinicName ORDER BY distance_in_km LIMIT 15"
-            data=([x,y,selected_speciality])
-            print (selected_speciality)
-            cur.execute(query,data)
-            results=cur.fetchall()
+
+            #query="SELECT distinct dc.DoctorName,cll.ClinicName,Latitude,Lon,Address, 111.045* DEGREES(ACOS(COS(RADIANS(%s)) * COS(RADIANS(Latitude))* COS(RADIANS(%s) - RADIANS(Lon))+ SIN(RADIANS(%s))* SIN(RADIANS(Latitude)))) AS distance_in_km FROM clinic_lat_long as cll,doc_clinic as dc,clinic_add as ca where cll.ClinicName IN (SELECT dc.ClinicName from doc_clinic where DoctorName in (select DoctorName from doc_speciality where Speciality=%s)) and cll.ClinicName=dc.ClinicName and cll.ClinicName=ca.ClinicName ORDER BY distance_in_km LIMIT 15"
+            """if(text):
+                print("Hello")
+                query2="select distinct dc.DoctorName,ds.Speciality,dc.ClinicName,ca.Address,cll.Latitude,cll.Lon from doc_speciality as ds,doc_clinic as dc,clinic_add as ca,clinic_lat_long as cll where (ds.DoctorName=dc.DoctorName AND dc.ClinicName=ca.ClinicName AND cll.ClinicName=dc.ClinicName AND ds.Speciality IN %s) LIMIT 15 "
+                data=([selected_speciality])
+                cur.execute(query2,data)
+                results=cur.fetchall()
+                print(results)
+                for result in results:
+                    final.append(str(result[4])+","+str(result[5]))
+                    doctordata.append([result[0],result[2],result[3]])
+                print(doctordata)
+                cur.close()
+                latlong=json.dumps(final)"""
+                #return render(request, 'finddoctor/finddoctor.html', {'form':latlong,'doctordata':doctordata})
+
+
+            if(text):
+                query="SELECT D.DoctorName,D.ClinicName,Latitude,Lon,D.Address,111.045* DEGREES(ACOS(COS(RADIANS(latpoint)) * COS(RADIANS(Latitude))* COS(RADIANS(longpoint) - RADIANS(Lon))+ SIN(RADIANS(latpoint))* SIN(RADIANS(Latitude)))) AS distance_in_km FROM Doctors as D JOIN ((SELECT %s AS latpoint, %s AS longpoint) AS p) where D.ClinicName IN (SELECT ClinicName from doc_clinic where DoctorName in (select DoctorName from doc_speciality where Speciality=%s)) ORDER BY distance_in_km LIMIT 15"
+                data=([x,y,selected_speciality])
+                print (selected_speciality)
+                cur.execute(query,data)
+                results=cur.fetchall()
             #final=[]
-            for result in results:
-                final.append(str(result[1])+","+str(result[2]))
-            print(final)
+                for result in results:
+                    final.append(str(result[2])+","+str(result[3]))
+                    doctordata.append([result[0],result[1],result[4]])
+                print(final)
+                print(doctordata)
             
-            cur.close()
-    latlong=json.dumps(final)
-    return render(request, 'finddoctor/finddoctor.html', {'form':latlong})
+                cur.close()
+                latlong=json.dumps(final)
+
+            else:
+                print("Hello")
+                query2="select distinct dc.DoctorName,ds.Speciality,dc.ClinicName,ca.Address,cll.Latitude,cll.Lon from doc_speciality as ds,doc_clinic as dc,clinic_add as ca,clinic_lat_long as cll where (ds.DoctorName=dc.DoctorName AND dc.ClinicName=ca.ClinicName AND cll.ClinicName=dc.ClinicName AND ds.Speciality=%s) LIMIT 15 "
+        #query2="SELECT D.DoctorName,D.ClinicName,Latitude,Lon,D.Address FROM Doctors as D where D.ClinicName IN (SELECT ClinicName from doc_clinic where DoctorName in (select DoctorName from doc_speciality where Speciality=%s)) LIMIT 15"
+                data=([selected_speciality])
+                cur.execute(query2,data)
+                results=cur.fetchall()
+                print(results)
+                for result in results:
+                    final.append(str(result[4])+","+str(result[5]))
+                    doctordata.append([result[0],result[2],result[3]])
+                print(doctordata)
+                cur.close()
+                latlong=json.dumps(final)
+
+    return render(request, 'finddoctor/finddoctor.html', {'form':latlong,'doctordata':doctordata})
+    #del doctordata[:]
+    
 
 '''
 def display(request):

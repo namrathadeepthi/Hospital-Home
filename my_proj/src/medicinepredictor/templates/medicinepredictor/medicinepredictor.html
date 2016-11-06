@@ -30,7 +30,12 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
       <script> $(document).ready(function() {
   $('.modal-trigger').leanModal();
-});  </script>
+});  
+$(document).ready(function() {
+    $('select').material_select();
+});
+
+      </script>
 <div id="wrapper">
   <div id="page-wrapper">
     <div id="page">
@@ -40,30 +45,221 @@
           <div class="row">
             
           <div class="col s1 m4" >
-        <p><br><img src="{% static 'site/img/index.jpeg' %}" alt="" width="200" height="200" class="alignleft" /> </p>
+        <p><br><img src="{% static 'site/img/healthtip.png' %}" alt="" width="200" height="200" class="alignleft" /> </p>
           </div>
+        
+        
+          <form action="{% url "medicinepredictor:process" %}" method="POST">
+                    {% csrf_token %}
           <div class="input-field col s1 m5">
           <h3>Heart Disease<b style="color:#069">Predictor</b></h3>
-          <p> Want to know whether you have the probablity of getting heart disease?? </p>
-          
-                   <b>AGE</b><input id="age" type="number" class="validate" style="border: 1px solid black" ></input>
-                    <p>
-      <input name="gender" type="radio" id="male" />
+          {{output}}
+          </div></div>
+          <div class="row">
+            <div class="input-field col s1 m5">
+                   <b>AGE</b><input name="age" type="number" min="0" max="120" class="validate" style="border: 1px solid black" >
+                   </div>
+                   </div> 
+                   <div class="row">
+                    <div class="input-field col s1 m2">
+
+      <b>GENDER</b><input name="gender" type="radio" value="0" id="male" />
       <label for="male">male</label>
-    </p>
-               <p>
-      <input name="gender" type="radio" id="female" />
-      <label for="female">female</label>
-    </p>   
-                </div>
+      <br>
+    </div>
+      <div class="input-field col s1 m2">
+      <input name="gender" type="radio" value="1" id="female" />
+      <label for="female">female</label><br> <br> <br> <br>
+      </div>
+       </div>
+       <div class="row">
+                    <div class="input-field col s1 m5">
+      <b>CHEST PAIN TYPE</b> <br>
+      <input name="chestpaintype" type="radio" value="1" id="typicalAngina" />
+      <label for="typicalAngina">typicalAngina</label>
+      <br>
+           
+      <input name="chestpaintype" type="radio" value="2" id="ata" />
+      <label for="ata">atypicalAngina</label><br> 
+
+       <input name="chestpaintype" type="radio" value="3" id="nap" />
+      <label for="nap">nonAnginalPain</label><br> 
+
+       <input name="chestpaintype" type="radio" value="4" id="asm" />
+      <label for="asm">asymptomatic</label><br> 
+      </div>
+       </div>
+
+         <!--
+          <div class="row">
+         <div class="input-field col s1 m5">
+          chestpaintype
+           <select name="chestpaintype">
+      
+      <option value="1">typical angina</option>
+      <option value="2">atypical angina</option>
+      <option value="3">non-anginal pain</option>
+      <option value="4">asymptomatic</option>
+    </select>
+ </div></div>
+ -->
+ <div class="row">
+
+ <div class="input-field col s1 m5">
+             <b>resting blood pressure (in mm Hg)</b><input name="bp" type="number" min="0" max="350" class="validate" style="border: 1px solid black" >  
+           </div>
+              </div>
+              
+              <div class="row">
+
+ <div class="input-field col s1 m5">
+             <b>chol: serum cholestoral in mg/dl </b><input name="chol" type="number" min="0"  class="validate" style="border: 1px solid black" >  
+           </div>
+              </div>
+
+              <div class="row">
+
+ <div class="input-field col s1 m5">
+             <b> (fasting blood sugar > 120 mg/dl) (1 = true; 0 = false) </b><input name="bsugar" type="number" min="0" max="1" class="validate" style="border: 1px solid black" >  
+           </div>
+              </div>
+<div class="row">
+
+ 
+               <div class="row">
+
+ <div class="input-field col s1 m5">
+             <b> maximum heart rate achieved  </b><input name="thalach" type="number" class="validate" style="border: 1px solid black" >  
+           </div>
+              </div>
+              <div class="row">
+<div class="input-field col s1 m5">
+             <b>Exercise Induced Angina:</b><br>
+             <input name="exang" type="radio" value="1" id="yes" />
+      <label for="yes">yes</label>
+      <br>
+           
+      <input name="exang" type="radio" value="0" id="no" />
+      <label for="no">no</label>
+           </div>
+              </div>
+             <div class="row">
+
+ <div class="input-field col s1 m5">
+             <b> Old Peak ( ST depression induced by exercise relative to rest ) </b><input name="oldpeak" type="number"  class="validate" style="border: 1px solid black" >  
+           </div>
+              </div>
+
+              <div class="row">
+
+ <div class="input-field col s1 m5">
+             <b> number of major vessels (0-3) colored by flourosopy  </b><input name="ca" type="number" min="0" max="3" class="validate" style="border: 1px solid black" >  
+           </div>
+              </div>
+
+<div class="row">
+<div class="input-field col s1 m5">
+             <b>Rest ECG:</b><br>
+             <input name="restecg" type="radio" value="0" id="normal" />
+      <label for="normal">normal</label>
+      <br>
+           
+      <input name="restecg" type="radio" value="1" id="waveabnormality" />
+      <label for="waveabnormality">having ST-T wave abnormality</label>
+      <br>
+      <input name="restecg" type="radio" value="2" id="hypertrophy" />
+      <label for="hypertrophy">non-showing probable or definite left ventricular hypertrophy </label>
+      <br>
+           </div>
+              </div>
+      <div class="row">
+<div class="input-field col s1 m5">
+             <b>Slope:</b><br>
+             <input name="slope" type="radio" value="1" id="upsloping" />
+      <label for="upsloping">upsloping</label>
+      <br>
+           
+      <input name="slope" type="radio" value="2" id="flat" />
+      <label for="flat">flat</label>
+      <br>
+      <input name="slope" type="radio" value="3" id="downsloping" />
+      <label for="downsloping">downsloping</label>
+      <br>
+           </div>
+              </div>
+        <!--      
+        <div class="row">
+         <div class="input-field col s1 m5">
+          
+           <select name="rest_ecg">
+      <option value="" disabled selected>Rest ECG</option>
+      <option value="0">  normal </option>
+      <option value="1"> having ST-T wave abnormality</option>
+      <option value="2">non-showing probable or definite left ventricular hypertrophy </option>
+      
+    </select>
+ </div></div>
+-->
+ 
+
+<!--
+               <div class="row">
+
+ <div class="input-field col s1 m5">
+             <b>Exercise Induced Angina:</b><br>
+             <input name="exang" type="radio" value="1" id="yes" />
+      <label for="yes">yes</label>
+      <br>
+           
+      <input name="exang" type="radio" value="0" id="no" />
+      <label for="no">no</label>
+           </div>
+              </div>
+               <div class="row">
+
+ <div class="input-field col s1 m5">
+             <b> Old Peak </b><input name="oldpeak" type="number"  class="validate" style="border: 1px solid black" >  
+           </div>
+              </div>
+              <div class="row">
+         <div class="input-field col s1 m5">
+          
+           <select name="slope">
+      <option value="" disabled selected>The slope of the peak exercise ST segment </option>
+      <option value="1">  upsloping </option>
+      <option value="2"> flat</option>
+      <option value="3">down-sloping</option>
+      
+    </select>
+ </div></div>
+ <div class="row">
+
+ <div class="input-field col s1 m5">
+             <b> number of major vessels (0-3) colored by flourosopy  </b><input name="ca" type="number" min="0" max="3" class="validate" style="border: 1px solid black" >  
+           </div>
+              </div>
+
+                <div class="row">
+         <div class="input-field col s1 m5">
+          
+           <select name="thal">
+      <option value="" disabled selected>thal </option>
+      <option value="3">  normal </option>
+      <option value="6"> fixed defect </option>
+      <option value="7"> reversible defect</option>
+      
+    </select>
+ </div></div> -->
+            <br> <br> <br>
                  <div class="col s1 m1">
-                 <br><br><br><br><br><br><br><br><br><br>
+                
          <button class="btn waves-effect waves-light light-blue darken-3" type="submit" name="action">Go
                  </button>
+
                  </div>
+                  </form>
                 </div>
-        
-        
+                  
   <div class="row">
   <br><br><br><br>
     <div class="col s12 m6">
